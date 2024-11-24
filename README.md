@@ -6,6 +6,7 @@
 
 ## **Features**
 - Query Python documentation directly to get contextual answers.
+- Retrieves and displays the source(s) used to generate each answer, providing full context for the response.
 - Simplifies complex Python concepts for junior developers.
 - Lightweight and efficient architecture using LangChain and ChromaDB.
 - Integration with gpt-3.5-turbo for enhanced natural language understanding.
