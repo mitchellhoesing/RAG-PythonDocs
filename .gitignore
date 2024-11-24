@@ -1,5 +1,3 @@
 # .gitignore
 .env
-stdout_results.txt
-index_slice_results.txt
 /chroma/
