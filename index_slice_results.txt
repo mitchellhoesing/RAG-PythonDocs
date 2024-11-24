@@ -1,4 +1,4 @@
-python main.py --query_text="How do I return a range from a list using indexing?" --create_database="False" > index_slice_results.txt
+python main.py --query_text="How do I return a range from a list using indexing?" --create_database="False"
 
 Prompt:
 
