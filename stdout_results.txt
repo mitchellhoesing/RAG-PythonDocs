@@ -1,0 +1,83 @@
+python main.py --query_text="How do I print to stdout in Python?" --create_database="False"
+
+Prompt:
+
+ Human: 
+Answer the question based only on the following context:
+
+Note that since "PyObject_CallObject()" *always* wants a tuple for the argument list, to call a function without arguments, pass "()" for the format, and to call a function with one argument, surround the argument in parentheses, e.g. "(i)".
+
+How do I catch the output from PyErr_Print() (or anything that prints to stdout/stderr)? ========================================================================================
+
+In Python code, define an object that supports the "write()" method. Assign this object to "sys.stdout" and "sys.stderr".  Call print_error, or just allow the standard traceback mechanism to work. Then, the output will go wherever your "write()" method sends it.
+
+The easiest way to do this is to use the "io.StringIO" class:
+
+>>> import io, sys
+
+>>> sys.stdout = io.StringIO()
+
+>>> print('foo')
+
+>>> print('hello world!')
+
+>>> sys.stderr.write(sys.stdout.getvalue())
+
+foo
+
+hello world!
+
+A custom object to do the same would look like this:
+
+---
+
+The easiest way to do this is to use the "io.StringIO" class:
+
+>>> import io, sys
+
+>>> sys.stdout = io.StringIO()
+
+>>> print('foo')
+
+>>> print('hello world!')
+
+>>> sys.stderr.write(sys.stdout.getvalue())
+
+foo
+
+hello world!
+
+A custom object to do the same would look like this:
+
+>>> import io, sys >>> class StdoutCatcher(io.TextIOBase): ...     def __init__(self): ...         self.data = [] ...     def write(self, stuff): ...         self.data.append(stuff) ... >>> import sys >>> sys.stdout = StdoutCatcher() >>> print('foo') >>> print('hello world!') >>> sys.stderr.write(''.join(sys.stdout.data)) foo hello world!
+
+How do I access a module written in Python from C? ==================================================
+
+You can get a pointer to the module object as follows:
+
+module = PyImport_ImportModule("<modulename>");
+
+---
+
+7. Input and Output
+
+*******************
+
+There are several ways to present the output of a program; data can be printed in a human-readable form, or written to a file for future use. This chapter will discuss some of the possibilities.
+
+7.1. Fancier Output Formatting
+
+==============================
+
+So far we've encountered two ways of writing values: *expression statements* and the "print()" function.  (A third way is using the "write()" method of file objects; the standard output file can be referenced as "sys.stdout". See the Library Reference for more information on this.)
+
+Often you'll want more control over the formatting of your output than simply printing space-separated values. There are several ways to format output.
+
+To use formatted string literals, begin a string with "f" or "F" before the opening quotation mark or triple quotation mark. Inside this string, you can write a Python expression between "{" and "}" characters that can refer to variables or literal values.
+
+---
+
+Answer the question based on the above context: How do I print to stdout in Python?
+
+Response: content='You can print to stdout in Python using the "print()" function or by using the "write()" method of file objects, with the standard output file referenced as "sys.stdout".' additional_kwargs={'refusal': None} response_metadata={'token_usage': {'completion_tokens': 36, 'prompt_tokens': 635, 'total_tokens': 671, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-3.5-turbo-0125', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None} id='run-6e659a13-0083-492d-8435-0df469f33b03-0' usage_metadata={'input_tokens': 635, 'output_tokens': 36, 'total_tokens': 671, 'input_token_details': {'audio': 0, 'cache_read': 0}, 'output_token_details': {'audio': 0, 'reasoning': 0}}
+Sources: ['data\\python-3.13-docs-text\\faq\\extending.txt', 'data\\python-3.13-docs-text\\faq\\extending.txt', 'data\\python-3.13-docs-text\\tutorial\\inputoutput.txt']
